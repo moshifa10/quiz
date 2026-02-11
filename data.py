@@ -15,10 +15,10 @@ response.raise_for_status()
 data = response.json()
 # print(data)
 
-question_data = []
+question_data = data["results"]
 
-for question in data["results"]:
-    question_data.append(question)
+# for question in data["results"]:
+#     question_data.append(question)
 
 
 # print(question_data)
