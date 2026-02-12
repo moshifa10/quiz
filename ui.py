@@ -27,6 +27,8 @@ class QuizInterface:
         self.wrong.grid(column=0, row=3)
 
 
+
+
         self.right_photo = PhotoImage(file="images/true.png")
         self.right = Button(image=self.right_photo, highlightthickness=0)
         self.right.grid(column=1, row=3)
