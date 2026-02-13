@@ -26,9 +26,6 @@ class QuizInterface:
         self.wrong = Button(image=self.wrong_photo, highlightthickness=0)
         self.wrong.grid(column=0, row=3)
 
-
-
-
         self.right_photo = PhotoImage(file="images/true.png")
         self.right = Button(image=self.right_photo, highlightthickness=0)
         self.right.grid(column=1, row=3)
@@ -40,5 +37,5 @@ class QuizInterface:
 
     def get_next_question(self):
         question = self.quiz.next_question()
-        print(question)
+        # print(question)
         self.canvas.itemconfig(self.question_text, text=question)
