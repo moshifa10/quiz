@@ -29,14 +29,16 @@ class QuizInterface:
         self.right_photo = PhotoImage(file="images/true.png")
         self.right = Button(image=self.right_photo, highlightthickness=0, command=self.true_pressed)
         self.right.grid(column=1, row=3)
-
         self.get_next_question()
+
+
         self.window.mainloop()
 
         # Change the color of the 
 
     def get_next_question(self):
         question = self.quiz.next_question()
+        self.canvas.config(bg="white")
         # print(question)
         self.canvas.itemconfig(self.question_text, text=question)
 
@@ -51,10 +53,15 @@ class QuizInterface:
 
     def give_feed_back(self, is_right):
         if is_right:
+            print(is_right)
+            self.window.after(ms=1000, func=self.get_next_question)
             self.canvas.config(bg="green")
 
         else:
+            print(is_right)
+            self.window.after(ms=1000, func=self.get_next_question)
             self.canvas.config(bg="red")
 
-        self.window.after(ms=1000, func=self.get_next_question)
-        self.canvas.config(bg="white")
+        
+        # self.window.after(ms=1000, func=self.get_next_question)
+        
