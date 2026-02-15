@@ -11,7 +11,7 @@ class QuizInterface:
         self.window.title("Njabs Quiz")
         self.window.config(bg=THEME_COLOR, padx=50, pady=20)
 
-        self.score =  Label(text="Score: 0", font=("Arial", 15, "normal") , bg=THEME_COLOR, fg="white")
+        self.score =  Label(text=f"Score: {self.quiz.score}", font=("Arial", 15, "normal") , bg=THEME_COLOR, fg="white")
         self.score.grid(column=1, row=0)
 
         self.canvas = Canvas(height=250,width=300,bg="white")
@@ -37,10 +37,18 @@ class QuizInterface:
         # Change the color of the 
 
     def get_next_question(self):
-        question = self.quiz.next_question()
         self.canvas.config(bg="white")
-        # print(question)
-        self.canvas.itemconfig(self.question_text, text=question)
+        if self.quiz.still_has_questions():
+            self.update_score()
+            question = self.quiz.next_question()
+            # print(question)
+            self.canvas.itemconfig(self.question_text, text=question)
+            
+
+        else:
+            self.canvas.itemconfig(tagOrId=self.question_text, text="You have reached the end of the questions")
+            self.right.config(state="disabled")
+            self.wrong.config(state="disabled")
 
 
     def true_pressed(self):
@@ -53,15 +61,13 @@ class QuizInterface:
 
     def give_feed_back(self, is_right):
         if is_right:
-            print(is_right)
-            self.window.after(ms=1000, func=self.get_next_question)
+            # print(is_right)
             self.canvas.config(bg="green")
 
         else:
-            print(is_right)
-            self.window.after(ms=1000, func=self.get_next_question)
             self.canvas.config(bg="red")
+        self.window.after(ms=1000, func=self.get_next_question)
+        
 
-        
-        # self.window.after(ms=1000, func=self.get_next_question)
-        
+    def update_score(self):
+        self.score.config(text=f"Score {self.quiz.score}")
